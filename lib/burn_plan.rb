@@ -1,7 +1,7 @@
 require 'burn_plan/version'
 
 module BurnPlan
-
+  class NotEnoughMoneyException < Exception; end
 end
 
 require 'burn_plan/life'
@@ -18,3 +18,4 @@ require 'burn_plan/monte_carlo_results'
 require 'burn_plan/distribution'
 require 'burn_plan/distribution_strategy/distribution_strategy'
 require 'burn_plan/distribution_strategy/no_distribution_strategy'
+require 'burn_plan/distribution_strategy/uniform_distribution_strategy'

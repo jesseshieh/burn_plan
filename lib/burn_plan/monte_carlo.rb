@@ -11,8 +11,15 @@ module BurnPlan
       results = MonteCarloResultsBuilder.new
       @num_simulations.times do |i|
         @life.reset
-        @life.live
-        results.add_result @life.ending_portfolio_value
+        begin
+          @life.live
+          results.add_result @life.ending_portfolio_value
+        rescue NotEnoughMoneyException
+          # is 0 appropriate here? the entire portfolio may not necessarily be 0
+          # this exception can be thrown if 1 single asset doesn't have enough money
+          # for withdraw
+          results.add_result 0
+        end
       end
       results.build
     end

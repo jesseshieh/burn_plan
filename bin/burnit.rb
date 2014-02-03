@@ -22,7 +22,8 @@ portfolio = BurnPlan::PortfolioBuilder.new
   .build
 
 # set our life strategies
-distribution_strategy = BurnPlan::DistributionStrategy::NoDistributionStrategy.new
+# distribution_strategy = BurnPlan::DistributionStrategy::NoDistributionStrategy.new
+distribution_strategy = BurnPlan::DistributionStrategy::UniformDistributionStrategy.new(100.0)
 
 # run the simulations
 life = BurnPlan::Life.new(portfolio, 70, economy, federal_reserve, distribution_strategy)

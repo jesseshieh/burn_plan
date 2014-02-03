@@ -14,8 +14,7 @@ describe BurnPlan::DistributionStrategy::NoDistributionStrategy do
 
   it 'always returns zero' do
     portfolio.assets.values.each do |asset|
-      subject.for_asset(asset).name.should eq asset.name
-      subject.for_asset(asset).value.should eq 0
+      subject.for_asset(asset).should eq 0
     end
   end
 end

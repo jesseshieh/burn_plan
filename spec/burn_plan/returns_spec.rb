@@ -6,8 +6,8 @@ describe BurnPlan::Returns do
     let(:asset_class1) { double('asset class 1') }
     let(:asset_classes) do
       {
-        'asset1' => asset_class1,
-        'asset2' => double('asset class 2'),
+        'asset1' => 0.1,
+        'asset2' => 0.2,
       }
     end
     let(:inflation) { double('inflation', {
@@ -16,7 +16,7 @@ describe BurnPlan::Returns do
     subject { described_class.new(asset_classes, inflation) }
 
     it 'applies the return and returns a new asset' do
-      inflation.should_receive(:real_return).with(asset_class1)
+      inflation.should_receive(:real_return).with(0.1)
       next_asset = subject.apply(asset)
       next_asset.name.should eq 'asset1'
       next_asset.value.should eq 1_030
