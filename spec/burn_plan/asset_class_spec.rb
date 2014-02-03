@@ -16,3 +16,4 @@ describe BurnPlan::AssetClass do
     end
   end
 end
+
