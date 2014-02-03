@@ -7,12 +7,25 @@ describe BurnPlan::AssetClass do
       :rand => 0.99
   }) }
 
-  subject { described_class.new("fake-name", mean, stddev) }
+  subject { described_class.new("fake-name", mean, stddev).next }
 
   describe '#next' do
-    it 'produces the next return' do
+    before do
       BurnPlan::RandomGaussian.should_receive(:new).and_return(random_gaussian)
-      subject.next.should eq 0.99
+    end
+
+    it 'produces the next return' do
+      subject.should eq 0.99
+    end
+
+    context 'when random gaussian is less than -100%' do
+      let(:random_gaussian) { double('random gaussian', {
+          :rand => -1.1
+      }) }
+
+      it 'uses -100%' do
+        subject.should eq -1.0
+      end
     end
   end
 end

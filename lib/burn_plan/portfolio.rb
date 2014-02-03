@@ -40,7 +40,7 @@ module BurnPlan
 
     def take_distribution(distribution)
       next_portfolio = PortfolioBuilder.new
-      @assets.each_pair do |asset_name, asset|
+      @assets.values.each do |asset|
         next_asset = asset.take_distribution(distribution.for_asset(asset))
         next_portfolio.add_asset(next_asset)
       end

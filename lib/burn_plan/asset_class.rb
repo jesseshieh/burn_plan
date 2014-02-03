@@ -10,7 +10,9 @@ module BurnPlan
     end
 
     def next
-      @random_gaussian.rand
+      ret = @random_gaussian.rand
+      return -1.0 if ret < -1.0
+      ret
     end
   end
 end

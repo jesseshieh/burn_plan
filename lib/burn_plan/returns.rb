@@ -26,7 +26,9 @@ module BurnPlan
     # and returns a new asset
     def apply(asset)
       nominal_rate = @asset_classes[asset.name]
+      raise Exception.new("nominal rate can not be less than -100%: #{nominal_rate}") if nominal_rate < -1.0
       real_rate = @inflation.real_return(nominal_rate)
+      raise Exception.new("real rate can not be less than -100%: #{real_rate}") if real_rate < -1.0
       next_value = asset.value * (1 + real_rate)
       asset.class.new(asset.name, next_value)
     end
