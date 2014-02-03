@@ -12,5 +12,9 @@ portfolio = BurnPlan::PortfolioBuilder.new
   .add_asset(BurnPlan::Asset.new('Long Term Government Bonds', 1_000))
   .build
 
-puts BurnPlan::Simulator.new(portfolio, 70, economy, federal_reserve).run
+life = BurnPlan::Life.new(portfolio, 70, economy, federal_reserve)
+
+monte_carlo = BurnPlan::MonteCarlo.new(100, life)
+monte_carlo.run
+puts monte_carlo.ending_portfolio_values
 
