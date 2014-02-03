@@ -12,7 +12,9 @@ portfolio = BurnPlan::PortfolioBuilder.new
   .add_asset(BurnPlan::Asset.new('Long Term Government Bonds', 1_000))
   .build
 
-life = BurnPlan::Life.new(portfolio, 70, economy, federal_reserve)
+distribution_strategy = BurnPlan::DistributionStrategy::NoDistributionStrategy.new
+
+life = BurnPlan::Life.new(portfolio, 70, economy, federal_reserve, distribution_strategy)
 
 monte_carlo = BurnPlan::MonteCarlo.new(100, life)
 results = monte_carlo.run
