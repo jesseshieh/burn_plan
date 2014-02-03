@@ -20,6 +20,7 @@ Or install it yourself as:
 ## Usage
 
 # in burn_plan folder, run
+bundle
 ruby -Ilib bin/burnit.rb
 
 ## Contributing
