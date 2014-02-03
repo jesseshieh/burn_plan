@@ -1,6 +1,6 @@
 module BurnPlan
   # represents the economic activity during a time period
-  class Returns
+  class ReturnsBuilder
     def initialize(inflation)
       @asset_classes = {}
       @inflation = inflation
@@ -8,6 +8,18 @@ module BurnPlan
 
     def add_return(asset_class, asset_return)
       @asset_classes[asset_class.name] = asset_return
+      self
+    end
+
+    def build
+      Returns.new(@asset_classes, @inflation)
+    end
+  end
+
+  class Returns
+    def initialize(asset_classes, inflation)
+      @asset_classes = asset_classes
+      @inflation = inflation
     end
 
     # applies the economic activity during this time period to an asset

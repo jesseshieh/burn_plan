@@ -23,12 +23,12 @@ module BurnPlan
     # generates 1 time period of returns
     def create_real_returns(federal_reserve)
       inflation = federal_reserve.create_inflation
-      returns = Returns.new(inflation)
+      returns = ReturnsBuilder.new(inflation)
       @asset_classes.values.each do |asset_class|
         nominal_return = asset_class.next
         returns.add_return(asset_class, nominal_return)
       end
-      returns
+      returns.build
     end
   end
 end
