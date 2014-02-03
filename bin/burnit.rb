@@ -15,6 +15,7 @@ portfolio = BurnPlan::PortfolioBuilder.new
 life = BurnPlan::Life.new(portfolio, 70, economy, federal_reserve)
 
 monte_carlo = BurnPlan::MonteCarlo.new(100, life)
-monte_carlo.run
-puts monte_carlo.ending_portfolio_values
+results = monte_carlo.run
 
+puts results.mean
+puts results.num_zeros

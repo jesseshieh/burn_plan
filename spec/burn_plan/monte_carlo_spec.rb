@@ -11,8 +11,11 @@ describe BurnPlan::MonteCarlo do
   subject { described_class.new(num_simulations, life) }
 
   it 'runs through the life N times' do
+    monte_carlo_results_builder = double('monte carlo results builder')
+    BurnPlan::MonteCarloResultsBuilder.should_receive(:new).and_return(monte_carlo_results_builder)
+    monte_carlo_results_builder.should_receive(:add_result).exactly(num_simulations).times
+    monte_carlo_results_builder.should_receive(:build).and_return('fake-results')
     life.should_receive(:live).exactly(num_simulations).times
-    subject.run
-    subject.ending_portfolio_values.should eq [3] * num_simulations
+    subject.run.should eq 'fake-results'
   end
 end
