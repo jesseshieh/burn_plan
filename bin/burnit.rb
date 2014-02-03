@@ -14,16 +14,17 @@ economy = BurnPlan::EconomyBuilder.new
 
 # TODO: maybe we shouldn't use floats for money. use int as cents instead with rounding
 portfolio = BurnPlan::PortfolioBuilder.new
-  .add_asset(BurnPlan::Asset.new('Large Company Stock',        1_000.0))
-  .add_asset(BurnPlan::Asset.new('Small Company Stocks',       1_000.0))
-  .add_asset(BurnPlan::Asset.new('Long-term Corporate Bonds',  1_000.0))
-  .add_asset(BurnPlan::Asset.new('Long Term Government Bonds', 1_000.0))
-  .add_asset(BurnPlan::Asset.new('U.S. Treasury Bills',        1_000.0))
+  .add_asset(BurnPlan::Asset.new('Large Company Stock',        10_000.0))
+  .add_asset(BurnPlan::Asset.new('Small Company Stocks',       10_000.0))
+  .add_asset(BurnPlan::Asset.new('Long-term Corporate Bonds',  10_000.0))
+  .add_asset(BurnPlan::Asset.new('Long Term Government Bonds', 10_000.0))
+  .add_asset(BurnPlan::Asset.new('U.S. Treasury Bills',        10_000.0))
   .build
 
 # set our life strategies
 # distribution_strategy = BurnPlan::DistributionStrategy::NoDistributionStrategy.new
-distribution_strategy = BurnPlan::DistributionStrategy::UniformDistributionStrategy.new(100.0)
+# distribution_strategy = BurnPlan::DistributionStrategy::UniformDistributionStrategy.new(100.0)
+distribution_strategy = BurnPlan::DistributionStrategy::RebalancingPercentageDistributionStrategy.new(0.03, 50.0, 100.0)
 
 # run the simulations
 life = BurnPlan::Life.new(portfolio, 70, economy, federal_reserve, distribution_strategy)
