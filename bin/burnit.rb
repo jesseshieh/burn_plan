@@ -45,3 +45,4 @@ end
 
 puts results.mean.to_currency
 puts results.num_zeros
+puts results.likelihood_of_running_out_of_money

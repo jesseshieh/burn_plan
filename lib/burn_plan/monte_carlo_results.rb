@@ -39,6 +39,10 @@ module BurnPlan
       @ending_portfolio_values = ending_portfolio_values
     end
 
+    def count
+      @ending_portfolio_values.count
+    end
+
     def mean
       @ending_portfolio_values.mean
     end
@@ -49,6 +53,10 @@ module BurnPlan
         count += 1 if value == 0
       end
       count
+    end
+
+    def likelihood_of_running_out_of_money
+      1.0 * num_zeros / count
     end
   end
 end
