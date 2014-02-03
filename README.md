@@ -3,8 +3,6 @@ burn-plan
 
 Simulation and analysis of a personal financial portfolio
 
-TODO: Write a gem description
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -21,7 +19,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+# in burn_plan folder, run
+ruby -Ilib bin/burnit.rb
 
 ## Contributing
 
