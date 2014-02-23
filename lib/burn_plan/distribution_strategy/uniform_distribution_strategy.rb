@@ -1,5 +1,6 @@
 module BurnPlan
   module DistributionStrategy
+    # taken an equal dollar amount from all assets
     class UniformDistributionStrategy < DistributionStrategy
       def initialize(total_distribution_amount)
         @total_distribution_amount = total_distribution_amount
