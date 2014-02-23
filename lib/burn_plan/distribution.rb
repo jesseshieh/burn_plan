@@ -19,6 +19,14 @@ module BurnPlan
       @assets = assets
     end
 
+    def amount
+      sum = 0
+      @assets.values.each do |asset|
+        sum += asset.value
+      end
+      sum
+    end
+
     def for_asset(asset)
       @assets[asset.name].value or raise Exception.new("#{asset.name} distribution does not exist")
     end

@@ -46,4 +46,23 @@ describe BurnPlan::Portfolio do
       portfolio.assets.should == { 'asset1' => asset1, 'asset2' => asset2 }
     end
   end
+
+  describe '#execute_trades' do
+    let(:trades) {
+      BurnPlan::TradesBuilder.new
+      .add_trade(BurnPlan::Trade.new('asset1', 100))
+      .add_trade(BurnPlan::Trade.new('asset2', -100))
+      .build
+    }
+
+    subject { portfolio.execute_trades(trades) }
+
+    it 'ends up with the right amounts' do
+      asset1_result = double('asset1', :name => 'asset1', :value => 1100, :kind_of? => true)
+      asset2_result = double('asset2', :name => 'asset2', :value => 900, :kind_of? => true)
+      asset1.should_receive(:trade).with(100).and_return(asset1_result)
+      asset2.should_receive(:trade).with(-100).and_return(asset2_result)
+      subject.assets.should == { 'asset1' => asset1_result, 'asset2' => asset2_result }
+    end
+  end
 end

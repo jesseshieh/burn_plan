@@ -46,6 +46,23 @@ module BurnPlan
       end
       next_portfolio.build
     end
+
+    def execute_trades(trades)
+      # TODO: account for cash left over somehow, right now we assume cash left over
+      # is just dropped on the floor and lost (maybe taken as a distribution)
+      next_portfolio = PortfolioBuilder.new
+      @assets.values.each do |current_asset|
+        trade = trades.for_asset(current_asset)
+        unless trade
+          # no trade found, keey existing asset
+          next_portfolio.add_asset(current_asset)
+          next
+        end
+        next_asset = current_asset.trade(trade.amount)
+        next_portfolio.add_asset(next_asset)
+      end
+      next_portfolio.build
+    end
   end
 end
 

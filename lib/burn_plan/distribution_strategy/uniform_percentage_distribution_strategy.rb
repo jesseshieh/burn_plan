@@ -9,6 +9,8 @@ module BurnPlan
     class UniformPercentageDistributionStrategy < DistributionStrategy
       def initialize(total_distribution_percentage, minimum_distribution, maximum_distribution)
         @total_distribution_percentage = total_distribution_percentage
+
+        # these amounts don't need to account for inflation because the burn plan does everything in real returns
         @minimum_distribution = minimum_distribution
         @maximum_distribution = maximum_distribution
       end

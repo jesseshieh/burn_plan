@@ -18,4 +18,12 @@ describe BurnPlan::DistributionStrategy::UniformDistributionStrategy do
       subject.for_asset(asset).should eq 0.5
     end
   end
+
+  context 'with not enough money' do
+    let(:distribution_amount) { 1000 }
+
+    it 'raises an error' do
+      expect { subject }.to raise_exception(BurnPlan::NotEnoughMoneyException)
+    end
+  end
 end

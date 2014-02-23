@@ -1,5 +1,11 @@
 require 'burn_plan'
 
+# TODO: implement real tax strategy
+# TODO: implement no tax strategy
+# TODO:
+# TODO:
+# TODO:
+
 # construct our "world"
 federal_reserve = BurnPlan::FederalReserve.new(0.031, 0.043)
 
@@ -14,21 +20,23 @@ economy = BurnPlan::EconomyBuilder.new
 
 # TODO: maybe we shouldn't use floats for money. use int as cents instead with rounding
 portfolio = BurnPlan::PortfolioBuilder.new
-  .add_asset(BurnPlan::Asset.new('Large Company Stock',        10_000.0))
-  .add_asset(BurnPlan::Asset.new('Small Company Stocks',       10_000.0))
-  .add_asset(BurnPlan::Asset.new('Long-term Corporate Bonds',  10_000.0))
-  .add_asset(BurnPlan::Asset.new('Long Term Government Bonds', 10_000.0))
-  .add_asset(BurnPlan::Asset.new('U.S. Treasury Bills',        10_000.0))
+  .add_asset(BurnPlan::Asset.new('Large Company Stock',        3_000.0))
+  .add_asset(BurnPlan::Asset.new('Small Company Stocks',       0.0))
+  .add_asset(BurnPlan::Asset.new('Long-term Corporate Bonds',  0.0))
+  .add_asset(BurnPlan::Asset.new('Long Term Government Bonds', 0.0))
+  .add_asset(BurnPlan::Asset.new('U.S. Treasury Bills',        0.0))
   .build
 
 # set our life strategies
-# distribution_strategy = BurnPlan::DistributionStrategy::NoDistributionStrategy.new
-# distribution_strategy = BurnPlan::DistributionStrategy::UniformDistributionStrategy.new(100.0)
-distribution_strategy = BurnPlan::DistributionStrategy::RebalancingPercentageDistributionStrategy.new(0.03, 50.0, 100.0)
+#distribution_strategy = BurnPlan::DistributionStrategy::NoDistributionStrategy.new
+#distribution_strategy = BurnPlan::DistributionStrategy::UniformDistributionStrategy.new(100.0)
+distribution_strategy = BurnPlan::DistributionStrategy::UniformPercentageDistributionStrategy.new(0.03, 100.0, 100.0)
+#rebalancing_strategy = BurnPlan::RebalancingStrategy::NoRebalancingStrategy.new
+rebalancing_strategy = BurnPlan::RebalancingStrategy::OptimalRebalancingStrategy.new(portfolio)
 
 # run the simulations
-life = BurnPlan::Life.new(portfolio, 70, economy, federal_reserve, distribution_strategy)
-monte_carlo = BurnPlan::MonteCarlo.new(100, life)
+life_factory = BurnPlan::LifeFactory.new(portfolio, 70, economy, federal_reserve, distribution_strategy, rebalancing_strategy)
+monte_carlo = BurnPlan::MonteCarlo.new(1_000, life_factory)
 results = monte_carlo.run
 
 # get the results
@@ -44,6 +52,7 @@ class Numeric
   end
 end
 
-puts results.mean.to_currency
-puts results.num_zeros
+puts results.ending_portfolio_values_mean.to_currency
+puts results.ending_portfolio_values_num_zeros
 puts results.likelihood_of_running_out_of_money
+puts results.average_distribution
