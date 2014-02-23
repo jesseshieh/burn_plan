@@ -15,6 +15,10 @@ module BurnPlan
 
       def create_distribution(portfolio)
         distribution_amount = get_total_distribution_amount(portfolio)
+        if distribution_amount > portfolio.value
+          raise NotEnoughMoneyException.new("not enough value to distribute: #{distribution_amount} from #{portfolio.value}")
+        end
+
         distribution_percentage = 1.0 * distribution_amount / portfolio.value
 
         distribution = DistributionBuilder.new

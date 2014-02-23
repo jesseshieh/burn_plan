@@ -43,4 +43,12 @@ describe BurnPlan::DistributionStrategy::UniformPercentageDistributionStrategy d
       end
     end
   end
+
+  context 'not enough money' do
+    let(:minimum_amount) { 99999 }
+
+    it 'raises an exception' do
+      expect { subject }.to raise_exception(BurnPlan::NotEnoughMoneyException)
+    end
+  end
 end
