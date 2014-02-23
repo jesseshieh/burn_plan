@@ -26,9 +26,12 @@ module BurnPlan
       @rebalancing_strategy = rebalancing_strategy
       @ending_portfolio_value = nil
       @distribution_history = []
+      @lived = false
     end
 
     def live
+      raise Exception.new("you've already lived") if @lived
+      @lived = true
       @num_years_to_live.times do |year|
         @portfolio = @portfolio.next(@economy, @federal_reserve)
         distribution = @distribution_strategy.create_distribution(@portfolio)

@@ -63,6 +63,20 @@ module BurnPlan
       end
       next_portfolio.build
     end
+
+    private
+
+    def trade(asset_name, amount)
+
+    end
+
+    def buy(asset_name, amount)
+
+    end
+
+    def sell(asset_name, amount)
+
+    end
   end
 end
 

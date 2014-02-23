@@ -14,11 +14,13 @@ describe 'no distributions' do
     .add_asset(BurnPlan::Asset.new('Long Term Government Bonds', 1_000))
     .build
 
-    life = BurnPlan::Life.new(portfolio, 70, economy, federal_reserve)
+    distribution_strategy = BurnPlan::DistributionStrategy::NoDistributionStrategy.new
+    rebalancing_strategy = BurnPlan::RebalancingStrategy::NoRebalancingStrategy.new
+    life_factory = BurnPlan::LifeFactory.new(portfolio, 70, economy, federal_reserve, distribution_strategy, rebalancing_strategy)
 
-    monte_carlo = BurnPlan::MonteCarlo.new(100, life)
+    monte_carlo = BurnPlan::MonteCarlo.new(100, life_factory)
     results = monte_carlo.run
 
-    results.num_zeros.should eq 0
+    results.ending_portfolio_values_num_zeros.should eq 0
   end
 end

@@ -26,12 +26,13 @@ describe 'uniform distributions' do
     # set our life strategies
     # distribution_strategy = BurnPlan::DistributionStrategy::NoDistributionStrategy.new
     distribution_strategy = BurnPlan::DistributionStrategy::UniformDistributionStrategy.new(5_000.0)
+    rebalancing_strategy = BurnPlan::RebalancingStrategy::NoRebalancingStrategy.new
 
     # run the simulations
     num_years_to_live = 70
-    life = BurnPlan::Life.new(portfolio, num_years_to_live, economy, federal_reserve, distribution_strategy)
+    life_factory = BurnPlan::LifeFactory.new(portfolio, num_years_to_live, economy, federal_reserve, distribution_strategy, rebalancing_strategy)
     num_simulations = 100
-    monte_carlo = BurnPlan::MonteCarlo.new(num_simulations, life)
+    monte_carlo = BurnPlan::MonteCarlo.new(num_simulations, life_factory)
     results = monte_carlo.run
 
     # get the results
@@ -47,7 +48,7 @@ describe 'uniform distributions' do
       end
     end
 
-    results.mean.to_currency.should_not be_nil
-    results.num_zeros.should eq num_simulations
+    results.ending_portfolio_values_mean.to_currency.should_not be_nil
+    results.ending_portfolio_values_num_zeros.should eq num_simulations
   end
 end
