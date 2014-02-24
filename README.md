@@ -23,4 +23,5 @@ Usage
 ---------
     cd burn_plan
     bundle
+    vi bin/burnit.rb # edit with your own facts and assumptions 
     ruby -Ilib bin/burnit.rb
