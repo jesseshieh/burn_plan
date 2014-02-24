@@ -1,8 +1,7 @@
 require 'burn_plan'
 
-# TODO: implement real tax strategy
-# TODO: implement no tax strategy
-# TODO:
+# TODO: implement tax cost basis. requires multiple assets of the same class depending on when it was bought or sold
+# TODO: implement correlation coefficients somehow. when 1 asset crashes other stend to crash with it
 # TODO:
 # TODO:
 
@@ -20,18 +19,18 @@ economy = BurnPlan::EconomyBuilder.new
 
 # TODO: maybe we shouldn't use floats for money. use int as cents instead with rounding
 portfolio = BurnPlan::PortfolioBuilder.new
-  .add_asset(BurnPlan::Asset.new('Large Company Stock',        3_000.0))
-  .add_asset(BurnPlan::Asset.new('Small Company Stocks',       0.0))
+  .add_asset(BurnPlan::Asset.new('Large Company Stock',        1_000.0))
+  .add_asset(BurnPlan::Asset.new('Small Company Stocks',       1_000.0))
   .add_asset(BurnPlan::Asset.new('Long-term Corporate Bonds',  0.0))
-  .add_asset(BurnPlan::Asset.new('Long Term Government Bonds', 0.0))
-  .add_asset(BurnPlan::Asset.new('U.S. Treasury Bills',        0.0))
+  .add_asset(BurnPlan::Asset.new('Long Term Government Bonds', 500.0))
+  .add_asset(BurnPlan::Asset.new('U.S. Treasury Bills',        500.0))
   .build
 
 # set our life strategies
 #tax_strategy = BurnPlan::TaxStrategy::NoTaxStrategy.new
 tax_strategy = BurnPlan::TaxStrategy::CapitalGainsTaxStrategy.new(0.25)
 #distribution_strategy = BurnPlan::DistributionStrategy::NoDistributionStrategy.new
-distribution_strategy = BurnPlan::DistributionStrategy::UniformPercentageDistributionStrategy.new(0.03, 100.0, 100.0, tax_strategy)
+distribution_strategy = BurnPlan::DistributionStrategy::UniformPercentageDistributionStrategy.new(0.03, 70.0, 100.0, tax_strategy)
 #rebalancing_strategy = BurnPlan::RebalancingStrategy::NoRebalancingStrategy.new
 rebalancing_strategy = BurnPlan::RebalancingStrategy::OptimalRebalancingStrategy.new(portfolio)
 
