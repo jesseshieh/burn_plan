@@ -35,8 +35,11 @@ distribution_strategy = BurnPlan::DistributionStrategy::UniformPercentageDistrib
 rebalancing_strategy = BurnPlan::RebalancingStrategy::OptimalRebalancingStrategy.new(portfolio)
 
 # run the simulations
-life_factory = BurnPlan::LifeFactory.new(portfolio, 70, economy, federal_reserve, distribution_strategy, rebalancing_strategy)
-monte_carlo = BurnPlan::MonteCarlo.new(1_000, life_factory)
+num_years_to_live = 70
+life_factory = BurnPlan::LifeFactory.new(portfolio, num_years_to_live, economy, federal_reserve, distribution_strategy, rebalancing_strategy)
+
+num_simulations = 1_000
+monte_carlo = BurnPlan::MonteCarlo.new(num_simulations, life_factory)
 results = monte_carlo.run
 
 # get the results
