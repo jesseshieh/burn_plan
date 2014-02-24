@@ -34,9 +34,11 @@ module BurnPlan
       @lived = true
       @num_years_to_live.times do |year|
         @portfolio = @portfolio.next(@economy, @federal_reserve)
-        distribution = @distribution_strategy.create_distribution(@portfolio)
-        @distribution_history << distribution.amount
-        @portfolio = @portfolio.take_distribution(distribution)
+
+        trades = @distribution_strategy.create_distribution(@portfolio)
+        @portfolio = @portfolio.execute_trades(trades)
+        @distribution_history << trades.amount
+
         trades = @rebalancing_strategy.rebalance(@portfolio)
         @portfolio = @portfolio.execute_trades(trades)
       end

@@ -6,11 +6,11 @@ module BurnPlan
       end
 
       def create_distribution(portfolio)
-        distribution = DistributionBuilder.new
+        trades = TradesBuilder.new
         portfolio.assets.values.each do |asset|
-          distribution.add_asset Asset.new(asset.name, 0)
+          trades.add_trade Trade.new(asset.name, 0)
         end
-        distribution.build
+        trades.build
       end
     end
   end

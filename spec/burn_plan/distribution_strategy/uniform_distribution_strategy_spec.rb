@@ -15,7 +15,7 @@ describe BurnPlan::DistributionStrategy::UniformDistributionStrategy do
 
   it 'uniformly spreads out the distribution among the assets' do
     portfolio.assets.values.each do |asset|
-      subject.for_asset(asset).should eq 0.5
+      subject.for_asset(asset).amount.should eq -0.5
     end
   end
 

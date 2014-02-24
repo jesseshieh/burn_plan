@@ -29,5 +29,13 @@ module BurnPlan
     def for_asset(asset)
       @trades[asset.name]
     end
+
+    def amount
+      sum = 0
+      @trades.values.each do |trade|
+        sum += trade.amount
+      end
+      sum
+    end
   end
 end

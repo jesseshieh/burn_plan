@@ -1,6 +1,6 @@
 module BurnPlan
   module RebalancingStrategy
-    class NoRebalancingStrategy
+    class NoRebalancingStrategy < RebalancingStrategy
       def initialize
 
       end

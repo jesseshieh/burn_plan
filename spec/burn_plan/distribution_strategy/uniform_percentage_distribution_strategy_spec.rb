@@ -18,7 +18,7 @@ describe BurnPlan::DistributionStrategy::UniformPercentageDistributionStrategy d
 
   it 'uniformly spreads out the distribution among the assets by percentage' do
     portfolio.assets.values.each do |asset|
-      (subject.for_asset(asset) / asset.value).should eq distribution_percentage
+      (subject.for_asset(asset).amount / asset.value).should eq -1.0 * distribution_percentage
     end
   end
 
@@ -28,7 +28,7 @@ describe BurnPlan::DistributionStrategy::UniformPercentageDistributionStrategy d
     it 'uniformly spreads out the distribution evenly' do
       target_percentage = 1.0 * minimum_amount / 9900
       portfolio.assets.values.each do |asset|
-        (subject.for_asset(asset) / asset.value).should eq target_percentage
+        (subject.for_asset(asset).amount / asset.value).should eq -1.0 * target_percentage
       end
     end
   end
@@ -39,7 +39,7 @@ describe BurnPlan::DistributionStrategy::UniformPercentageDistributionStrategy d
     it 'uniformly spreads out the distribution evenly' do
       target_percentage = 1.0 * maximum_amount / 9900
       portfolio.assets.values.each do |asset|
-        (subject.for_asset(asset) / asset.value).should eq target_percentage
+        (subject.for_asset(asset).amount / asset.value).should eq -1.0 * target_percentage
       end
     end
   end

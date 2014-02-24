@@ -23,11 +23,11 @@ module BurnPlan
 
         distribution_percentage = 1.0 * distribution_amount / portfolio.value
 
-        distribution = DistributionBuilder.new
+        trades = TradesBuilder.new
         portfolio.assets.values.each do |asset|
-          distribution.add_asset Asset.new(asset.name, asset.value * distribution_percentage)
+          trades.add_trade Trade.new(asset.name, -1.0 * asset.value * distribution_percentage)
         end
-        distribution.build
+        trades.build
       end
 
       def get_total_distribution_amount(portfolio)

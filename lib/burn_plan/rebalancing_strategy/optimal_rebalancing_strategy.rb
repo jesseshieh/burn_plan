@@ -1,6 +1,6 @@
 module BurnPlan
   module RebalancingStrategy
-    class OptimalRebalancingStrategy
+    class OptimalRebalancingStrategy < RebalancingStrategy
       def initialize(initial_portfolio)
         # we use the initial portfolio's asset allocation percentage as the target
         @initial_portfolio = initial_portfolio

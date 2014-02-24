@@ -1,6 +1,6 @@
 module BurnPlan
   module TaxStrategy
-    class CapitalGainsTaxStrategy
+    class CapitalGainsTaxStrategy < TaxStrategy
       def initialize
 
       end

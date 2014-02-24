@@ -1,6 +1,6 @@
 module BurnPlan
   module TaxStrategy
-    class NoTaxStrategy
+    class NoTaxStrategy < TaxStrategy
       def initialize
 
       end
