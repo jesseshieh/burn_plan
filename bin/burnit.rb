@@ -28,9 +28,10 @@ portfolio = BurnPlan::PortfolioBuilder.new
   .build
 
 # set our life strategies
+#tax_strategy = BurnPlan::TaxStrategy::NoTaxStrategy.new
+tax_strategy = BurnPlan::TaxStrategy::CapitalGainsTaxStrategy.new(0.25)
 #distribution_strategy = BurnPlan::DistributionStrategy::NoDistributionStrategy.new
-#distribution_strategy = BurnPlan::DistributionStrategy::UniformDistributionStrategy.new(100.0)
-distribution_strategy = BurnPlan::DistributionStrategy::UniformPercentageDistributionStrategy.new(0.03, 100.0, 100.0)
+distribution_strategy = BurnPlan::DistributionStrategy::UniformPercentageDistributionStrategy.new(0.03, 100.0, 100.0, tax_strategy)
 #rebalancing_strategy = BurnPlan::RebalancingStrategy::NoRebalancingStrategy.new
 rebalancing_strategy = BurnPlan::RebalancingStrategy::OptimalRebalancingStrategy.new(portfolio)
 

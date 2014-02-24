@@ -7,12 +7,15 @@ module BurnPlan
     # draws from each asset proportionally instead of evenly. sort of like taking a salary of X
     # for the rest of your life, fixed, with no raises.
     class UniformPercentageDistributionStrategy < DistributionStrategy
-      def initialize(total_distribution_percentage, minimum_distribution, maximum_distribution)
+      def initialize(total_distribution_percentage, minimum_distribution, maximum_distribution, tax_strategy)
         @total_distribution_percentage = total_distribution_percentage
 
         # these amounts don't need to account for inflation because the burn plan does everything in real returns
+        # these represent after tax amounts
         @minimum_distribution = minimum_distribution
         @maximum_distribution = maximum_distribution
+
+        @tax_strategy = tax_strategy
       end
 
       def create_distribution(portfolio)
@@ -25,7 +28,14 @@ module BurnPlan
 
         trades = TradesBuilder.new
         portfolio.assets.values.each do |asset|
-          trades.add_trade Trade.new(asset.name, -1.0 * asset.value * distribution_percentage)
+          # TODO: this does each asset individually, might make sense to pay the taxes from a different asset
+          # in some cases. that's an optimization though for later
+          asset_distribution_amount = asset.value * distribution_percentage
+          pretax_distribution_amount = @tax_strategy.pretax_distribution_amount(asset, asset_distribution_amount)
+          if pretax_distribution_amount > asset.value
+            raise NotEnoughMoneyException.new("not enough value to distribute: #{asset.name}: #{pretax_distribution_amount} from #{asset.value}")
+          end
+          trades.add_trade Trade.new(asset.name, -1.0 * pretax_distribution_amount)
         end
         trades.build
       end

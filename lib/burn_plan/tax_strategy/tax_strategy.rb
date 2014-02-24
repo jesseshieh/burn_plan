@@ -5,7 +5,7 @@ module BurnPlan
 
       end
 
-      def compute_tax(trades)
+      def pretax_distribution_amount(asset, after_tax_amount)
         raise NotImplementedError
       end
     end

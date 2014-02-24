@@ -5,8 +5,8 @@ module BurnPlan
 
       end
 
-      def compute_tax(trades)
-        0 # no taxes
+      def pretax_distribution_amount(asset, after_tax_amount)
+        after_tax_amount
       end
     end
   end
