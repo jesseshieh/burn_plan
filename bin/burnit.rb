@@ -55,7 +55,7 @@ class Numeric
   end
 end
 
-puts results.ending_portfolio_values_mean.to_currency
-puts results.ending_portfolio_values_num_zeros
-puts results.likelihood_of_running_out_of_money
-puts results.average_distribution
+puts "Average ending portfolio value: #{results.ending_portfolio_values_mean.to_currency}"
+puts "Number of simulations where you ran out of money: #{results.ending_portfolio_values_num_zeros}"
+puts "Likelihood you will run out of money: #{results.likelihood_of_running_out_of_money}"
+puts "Average yearly distribution taken: #{results.average_distribution}"
