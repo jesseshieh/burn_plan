@@ -16,6 +16,8 @@ module BurnPlan
   end
 
   class Economy
+    attr_reader :asset_classes
+
     def initialize(asset_classes)
       @asset_classes = asset_classes
     end
