@@ -2,11 +2,6 @@ require 'burn_plan'
 require 'json'
 require 'digest/md5'
 
-# TODO: implement tax cost basis. requires multiple assets of the same class depending on when it was bought or sold
-# TODO: implement correlation coefficients somehow. when 1 asset crashes others tend to crash with it
-# TODO: rebalancing strategy should take into account taxes incurred during rebalance and include that in the distribution
-# TODO: distribution strategy needs to know how much taxes are incurred during rebalancing and distribute that amount also
-
 # find all permutuations of different asset classes
 def asset_permutations(increment, portfolio_value, num_assets)
   raise ArgumentError, "increment must evenly divide portfolio value" if portfolio_value % increment != 0
