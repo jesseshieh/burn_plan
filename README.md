@@ -2,6 +2,8 @@ Burn Plan (Financial Simulator)
 =========
 Simulates your personal financial portfolio
 ---------
+Simulates your financial portfolio thousands of times across decades to determine your likelihood of running out of money before you die.
+
 1. Set your inflation mean and stddev
 2. Define your various asset classes and their means and stddevs
 3. Create your portfolio of assets
