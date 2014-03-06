@@ -1,4 +1,4 @@
-Copyright (c) 2014 Square
+Copyright (c) 2014 Jesse Shieh
 
 MIT License
 
