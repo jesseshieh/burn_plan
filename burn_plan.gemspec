@@ -7,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = "Burn Plan"
   spec.version       = BurnPlan::VERSION
   spec.authors       = ["Jesse Shieh"]
-  spec.email         = ["jesse.shieh@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.email         = ["jesse.shieh.pub@gmail.com"]
+  spec.description   = %q{Simulates your financial portfolio thousands of times across decades to determine your likelihood of running out of money before you die.}
+  spec.summary       = %q{Personal financial portfolio simulator}
   spec.homepage      = ""
   spec.license       = "MIT"
 
