@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'burn_plan/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "Burn Plan"
+  spec.name          = "BurnPlan"
   spec.version       = BurnPlan::VERSION
   spec.authors       = ["Jesse Shieh"]
   spec.email         = ["jesse.shieh.pub@gmail.com"]
