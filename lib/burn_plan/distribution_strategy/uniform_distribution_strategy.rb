@@ -6,7 +6,7 @@ module BurnPlan
         @total_distribution_amount = total_distribution_amount
       end
 
-      def create_distribution(portfolio)
+      def create_distribution(portfolio, years_from_now)
         distribution_amount_per_asset = 1.0 * @total_distribution_amount / portfolio.assets.count
         trades = TradesBuilder.new
         portfolio.assets.values.each do |asset|
