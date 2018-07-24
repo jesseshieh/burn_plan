@@ -5,7 +5,7 @@ module BurnPlan
 
       end
 
-      def create_distribution(portfolio)
+      def create_distribution(portfolio, years_from_now)
         trades = TradesBuilder.new
         portfolio.assets.values.each do |asset|
           trades.add_trade Trade.new(asset.name, 0)

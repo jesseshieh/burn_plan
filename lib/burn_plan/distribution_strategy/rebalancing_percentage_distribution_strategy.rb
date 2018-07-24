@@ -17,7 +17,7 @@ module BurnPlan
         @portfolio_rebalancing_strategy = portfolio_rebalancing_strategy
       end
 
-      def create_distribution(portfolio)
+      def create_distribution(portfolio, years_from_now)
         transactions = @portfolio_rebalancing_strategy.rebalance(portfolio)
         sorted_transactions = transactions.sort_by {|x| x.amount }
 

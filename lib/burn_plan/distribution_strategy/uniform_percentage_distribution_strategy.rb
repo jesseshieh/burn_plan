@@ -18,7 +18,7 @@ module BurnPlan
         @tax_strategy = tax_strategy
       end
 
-      def create_distribution(portfolio)
+      def create_distribution(portfolio, years_from_now)
         distribution_amount = get_total_distribution_amount(portfolio)
         if distribution_amount > portfolio.value
           raise NotEnoughMoneyException.new("not enough value to distribute: #{distribution_amount} from #{portfolio.value}")
